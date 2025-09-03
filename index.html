@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live2Dモデリング依頼統合ドキュメント</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #F8F8F8;
+        }
+        .container {
+            max-width: 900px;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1.5rem;
+        }
+        .input-group label {
+            font-weight: 500;
+            color: #4A4A4A;
+            margin-bottom: 0.5rem;
+        }
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            border-radius: 8px;
+            border: 1px solid #D1D5DB;
+            padding: 0.75rem 1rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+        .input-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .section-header {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1F2937;
+            border-bottom: 2px solid #E5E7EB;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-item input {
+            width: 20px;
+            height: 20px;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 500;
+            color: #4A4A4A;
+        }
+        .info-value {
+            color: #1F2937;
+            font-weight: 500;
+            text-align: right;
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+        }
+        .price-label {
+            font-weight: 500;
+            color: #4A4A4A;
+        }
+        .price-value {
+            font-weight: 700;
+            color: #1F2937;
+            text-align: right;
+        }
+        .total-price .price-value {
+            font-size: 1.5rem;
+            color: #000;
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            font-weight: 600;
+            color: #6B7280;
+            transition: all 0.2s ease-in-out;
+            border-bottom: 2px solid transparent;
+        }
+        .tab-button.active {
+            color: #3B82F6;
+            border-color: #3B82F6;
+            background-color: #FFFFFF;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="p-6 md:p-10">
+
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Live2Dモデリング依頼統合ドキュメント</h1>
+        <p class="text-center text-sm text-gray-500 mb-8">このページでヒアリングから見積もり、仕様書作成まで一貫して管理できます。</p>
+
+        <div class="flex justify-center mb-6">
+            <button class="tab-button active" data-tab="tab-1">ヒアリング</button>
+            <button class="tab-button" data-tab="tab-2">モデリング詳細</button>
+            <button class="tab-button" data-tab="tab-3">お見積もり・仕様書</button>
+        </div>
+
+        <div id="tab-1" class="tab-content active card p-8 mb-8">
+            <h2 class="section-header">1. 依頼内容ヒアリング（カルテ）</h2>
+            
+            <div class="input-group">
+                <label for="clientName">依頼者名・ハンドルネーム</label>
+                <input type="text" id="clientName">
+            </div>
+            <div class="input-group">
+                <label for="contactInfo">連絡先（メールアドレス等）</label>
+                <input type="text" id="contactInfo">
+            </div>
+            <div class="input-group">
+                <label for="characterName">キャラクター名</label>
+                <input type="text" id="characterName">
+            </div>
+            <div class="input-group">
+                <label for="usagePurpose">モデルの利用目的 (例: VTuber配信、動画制作、ゲームなど)</label>
+                <textarea id="usagePurpose"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="deliveryDate">ご希望納期</label>
+                <input type="text" id="deliveryDate" placeholder="例: 2024年12月31日">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="input-group">
+                    <label for="canvasWidth">キャンバスサイズ (横)</label>
+                    <input type="number" id="canvasWidth" placeholder="例: 4000">
+                </div>
+                <div class="input-group">
+                    <label for="canvasHeight">キャンバスサイズ (縦)</label>
+                    <input type="number" id="canvasHeight" placeholder="例: 8000">
+                </div>
+            </div>
+        </div>
+        
+        <div id="tab-2" class="tab-content card p-8 mb-8">
+            <h2 class="section-header">2. モデリング詳細</h2>
+
+            <h3 class="font-bold text-gray-800 mb-4 mt-6">2.1 モデリング一式</h3>
+            <div class="input-group">
+                <label>基本料金に含まれるモデリング内容</label>
+                <ul class="text-gray-600 mt-1 space-y-1">
+                    <li>表情（喜怒哀楽）※喜はアクティブで動作</li>
+                    <li>頭部、髪、体、服装の動き</li>
+                </ul>
+            </div>
+            <div class="mb-6">
+                <label class="block font-medium mb-2 text-gray-800">物理演算（揺れもの）</label>
+                <div class="checkbox-container">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="physics-hair" name="physics" value="髪の毛">
+                        <label for="physics-hair">髪の毛</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="physics-bust" name="physics" value="胸">
+                        <label for="physics-bust">胸</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="physics-skirt" name="physics" value="スカート・衣装">
+                        <label for="physics-skirt">スカート・衣装</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="physics-ear" name="physics" value="耳・尻尾">
+                        <label for="physics-ear">耳・尻尾</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="physics-accessory" name="physics" value="アクセサリー">
+                        <label for="physics-accessory">アクセサリー</label>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="notes-modeling-set">一式に関する特記事項・補足</label>
+                <textarea id="notes-modeling-set" placeholder="例: 目の色を変える機能を追加したい、トラッキングソフトはVTube Studioを想定など"></textarea>
+            </div>
+
+            <h3 class="font-bold text-gray-800 mb-4 mt-6">2.2 モデリング詳細</h3>
+            <div class="input-group">
+                <label for="modelDescription">モデル全体のイメージ</label>
+                <textarea id="modelDescription" placeholder="例: クールな表情が多め、髪の毛はふわっとした動きが欲しいなど"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="expressions">表情差分 (必要なものをすべて記入)</label>
+                <textarea id="expressions" placeholder="例: 笑顔、怒り、困り顔、照れ顔、ハイライト消し、青ざめなど"></textarea>
+            </div>
+            
+            <h3 class="font-bold text-gray-800 mb-4 mt-6">追加オプション</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                <div class="input-group">
+                    <label for="exp-count">特殊表情差分数（追加料金分）</label>
+                    <input type="number" id="exp-count" value="0" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="accessory-count">追加アクセサリー数（追加料金分）</label>
+                    <input type="number" id="accessory-count" value="0" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="arm-count">腕差分数（追加料金分）</label>
+                    <input type="number" id="arm-count" value="0" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="others-count">その他差分数（追加料金分）</label>
+                    <input type="number" id="others-count" value="0" min="0">
+                </div>
+                <div class="input-group col-span-1 md:col-span-2">
+                    <label for="option-items">追加オプション内容</label>
+                    <textarea id="option-items" placeholder="例: 衣装差分（冬服）、手ポーズ（ピース）、特殊モーション（片手を振る）など"></textarea>
+                </div>
+                <div class="input-group col-span-1 md:col-span-2">
+                    <label for="notes-other">その他、ご質問やご要望</label>
+                    <textarea id="notes-other" placeholder="例: 〇〇さんのようなタッチが好き、納品後のサポート体制について知りたいなど"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div id="tab-3" class="tab-content card p-8">
+            <h2 class="section-header">3. お見積もり・仕様書</h2>
+            
+            <div class="grid-2 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-4">ご請求金額</h3>
+                    <div class="price-row">
+                        <span class="price-label">基本料金</span>
+                        <span class="price-value" id="base-price">230,000円</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-label">追加オプション合計</span>
+                        <span class="price-value text-red-500" id="option-total">0円</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-label">小計（税抜）</span>
+                        <span class="price-value" id="sub-total">230,000円</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-label">消費税（10%）</span>
+                        <span class="price-value" id="tax-amount">23,000円</span>
+                    </div>
+                    <div class="price-row total-price mt-4">
+                        <span class="price-label font-bold">合計金額（税込）</span>
+                        <span class="price-value" id="grand-total">253,000円</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-4">最終確認（仕様書）</h3>
+                    <div class="info-item">
+                        <span class="info-label">依頼者名</span>
+                        <span class="info-value" id="spec-clientName">未入力</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">キャラクター名</span>
+                        <span class="info-value" id="spec-characterName">未入力</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">納品形式</span>
+                        <span class="info-value">VTube Studio用モデルデータ</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">ご希望納期</span>
+                        <span class="info-value" id="spec-deliveryDate">未入力</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">キャンバスサイズ</span>
+                        <span class="info-value" id="spec-canvasSize">未入力</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">ご契約プラン</span>
+                        <span class="info-value">一式フルモデリングプラン</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <p class="font-bold text-gray-800">契約内容の合意</p>
+                    <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                        <li>本ドキュメントに記載された内容を最終仕様とします。</li>
+                        <li>ご契約プランには、商用利用権と著作権譲渡が含まれています。</li>
+                        <li>納品後のモデルの修正やサポートについては、別途ご相談ください。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-8 space-x-4">
+                <button id="copy-text-btn" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-colors">テキストをコピー</button>
+                <button id="copy-markdown-btn" class="bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-green-700 transition-colors">Markdownをコピー</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const basePrice = 230000;
+            const optionPrices = {
+                expression: 5000,
+                accessory: 5000,
+                arm: 5000,
+                others: 5000,
+            };
+            const taxRate = 0.10;
+
+            const expCountInput = document.getElementById('exp-count');
+            const accessoryCountInput = document.getElementById('accessory-count');
+            const armCountInput = document.getElementById('arm-count');
+            const othersCountInput = document.getElementById('others-count');
+            
+            const optionTotalEl = document.getElementById('option-total');
+            const subTotalEl = document.getElementById('sub-total');
+            const taxAmountEl = document.getElementById('tax-amount');
+            const grandTotalEl = document.getElementById('grand-total');
+
+            const clientNameInput = document.getElementById('clientName');
+            const contactInfoInput = document.getElementById('contactInfo');
+            const characterNameInput = document.getElementById('characterName');
+            const usagePurposeInput = document.getElementById('usagePurpose');
+            const deliveryDateInput = document.getElementById('deliveryDate');
+            const canvasWidthInput = document.getElementById('canvasWidth');
+            const canvasHeightInput = document.getElementById('canvasHeight');
+            const modelDescriptionInput = document.getElementById('modelDescription');
+            const expressionsInput = document.getElementById('expressions');
+            const physicsCheckboxes = document.querySelectorAll('input[name="physics"]');
+            const notesModelingSetInput = document.getElementById('notes-modeling-set');
+            const optionItemsInput = document.getElementById('option-items');
+            const notesOtherInput = document.getElementById('notes-other');
+
+            const specClientName = document.getElementById('spec-clientName');
+            const specCharacterName = document.getElementById('spec-characterName');
+            const specDeliveryDate = document.getElementById('spec-deliveryDate');
+            const specCanvasSize = document.getElementById('spec-canvasSize');
+
+            const copyTextBtn = document.getElementById('copy-text-btn');
+            const copyMarkdownBtn = document.getElementById('copy-markdown-btn');
+
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    contents.forEach(c => c.classList.remove('active'));
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            function calculateTotals() {
+                const expTotal = parseInt(expCountInput.value) * optionPrices.expression;
+                const accessoryTotal = parseInt(accessoryCountInput.value) * optionPrices.accessory;
+                const armTotal = parseInt(armCountInput.value) * optionPrices.arm;
+                const othersTotal = parseInt(othersCountInput.value) * optionPrices.others;
+                
+                const totalOptions = expTotal + accessoryTotal + armTotal + othersTotal;
+                const subTotal = basePrice + totalOptions;
+                const taxAmount = Math.floor(subTotal * taxRate);
+                const grandTotal = subTotal + taxAmount;
+                
+                optionTotalEl.textContent = `${totalOptions.toLocaleString()}円`;
+                subTotalEl.textContent = `${subTotal.toLocaleString()}円`;
+                taxAmountEl.textContent = `${taxAmount.toLocaleString()}円`;
+                grandTotalEl.textContent = `${grandTotal.toLocaleString()}円`;
+            }
+
+            function updateSpecSheet() {
+                specClientName.textContent = clientNameInput.value || '未入力';
+                specCharacterName.textContent = characterNameInput.value || '未入力';
+                specDeliveryDate.textContent = deliveryDateInput.value || '未入力';
+                
+                const canvasWidth = canvasWidthInput.value;
+                const canvasHeight = canvasHeightInput.value;
+                if (canvasWidth && canvasHeight) {
+                    specCanvasSize.textContent = `${canvasWidth}px × ${canvasHeight}px`;
+                } else {
+                    specCanvasSize.textContent = '未入力';
+                }
+            }
+
+            function getPhysicsItems() {
+                const checkedPhysics = [];
+                physicsCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        checkedPhysics.push(checkbox.value);
+                    }
+                });
+                return checkedPhysics.join(', ');
+            }
+
+            function generateTextContent() {
+                const physicsItems = getPhysicsItems();
+                
+                const lines = [
+                    'Live2Dモデリング依頼カルテ',
+                    '--------------------------',
+                    '',
+                    '■ 1. 依頼内容ヒアリング',
+                    '依頼者名・ハンドルネーム: ' + clientNameInput.value,
+                    '連絡先: ' + contactInfoInput.value,
+                    'キャラクター名: ' + characterNameInput.value,
+                    'モデルの利用目的: ' + usagePurposeInput.value,
+                    'ご希望納期: ' + deliveryDateInput.value,
+                    'キャンバスサイズ: ' + (canvasWidthInput.value && canvasHeightInput.value ? `${canvasWidthInput.value}px × ${canvasHeightInput.value}px` : '未入力'),
+                    '',
+                    '■ 2. モデリング詳細',
+                    '【2.1 モデリング一式】',
+                    '基本料金に含まれるモデリング内容: 表情（喜怒哀楽）※喜はアクティブで動作, 頭部、髪、体、服装の動き',
+                    `物理演算（揺れもの）: ${physicsItems}`,
+                    '一式に関する特記事項・補足: ' + notesModelingSetInput.value,
+                    '',
+                    '【2.2 モデリング詳細】',
+                    'モデル全体のイメージ: ' + modelDescriptionInput.value,
+                    '表情差分: ' + expressionsInput.value,
+                    '',
+                    '■ 3. 追加オプション',
+                    '特殊表情差分数: ' + expCountInput.value,
+                    '追加アクセサリー数: ' + accessoryCountInput.value,
+                    '腕差分数: ' + armCountInput.value,
+                    'その他差分数: ' + othersCountInput.value,
+                    '追加オプション内容: ' + optionItemsInput.value,
+                    'その他、ご質問やご要望: ' + notesOtherInput.value,
+                    '',
+                    '■ 4. お見積もり',
+                    `基本料金: ${basePrice.toLocaleString()}円`,
+                    `追加オプション合計: ${parseInt(expCountInput.value) * optionPrices.expression + parseInt(accessoryCountInput.value) * optionPrices.accessory + parseInt(armCountInput.value) * optionPrices.arm + parseInt(othersCountInput.value) * optionPrices.others}円`,
+                    `小計（税抜）: ${subTotalEl.textContent}`,
+                    `消費税（10%）: ${taxAmountEl.textContent}`,
+                    `合計金額（税込）: ${grandTotalEl.textContent}`
+                ];
+                return lines.join('\n');
+            }
+
+            function generateMarkdownContent() {
+                const physicsItems = getPhysicsItems();
+                
+                const markdownLines = [
+                    '# Live2Dモデリング依頼カルテ',
+                    '',
+                    '---',
+                    '## 1. 依頼内容ヒアリング',
+                    `- **依頼者名・ハンドルネーム**: ${clientNameInput.value}`,
+                    `- **連絡先**: ${contactInfoInput.value}`,
+                    `- **キャラクター名**: ${characterNameInput.value}`,
+                    `- **モデルの利用目的**: ${usagePurposeInput.value}`,
+                    `- **ご希望納期**: ${deliveryDateInput.value}`,
+                    `- **キャンバスサイズ**: ${canvasWidthInput.value && canvasHeightInput.value ? `${canvasWidthInput.value}px × ${canvasHeightInput.value}px` : '未入力'}`,
+                    '',
+                    '---',
+                    '## 2. モデリング詳細',
+                    '### 2.1 モデリング一式',
+                    '- **基本料金に含まれるモデリング内容**: 表情（喜怒哀楽）※喜はアクティブで動作, 頭部、髪、体、服装の動き',
+                    `- **物理演算（揺れもの）**: ${physicsItems}`,
+                    `- **一式に関する特記事項・補足**: ${notesModelingSetInput.value}`,
+                    '',
+                    '### 2.2 モデリング詳細',
+                    `- **モデル全体のイメージ**: ${modelDescriptionInput.value}`,
+                    `- **表情差分**: ${expressionsInput.value}`,
+                    '',
+                    '---',
+                    '## 3. 追加オプション',
+                    `- **特殊表情差分数**: ${expCountInput.value}`,
+                    `- **追加アクセサリー数**: ${accessoryCountInput.value}`,
+                    `- **腕差分数**: ${armCountInput.value}`,
+                    `- **その他差分数**: ${othersCountInput.value}`,
+                    `- **追加オプション内容**: ${optionItemsInput.value}`,
+                    `- **その他、ご質問やご要望**: ${notesOtherInput.value}`,
+                    '',
+                    '---',
+                    '## 4. お見積もり',
+                    `| 項目 | 金額 |`,
+                    `| :--- | ---: |`,
+                    `| 基本料金 | ${basePrice.toLocaleString()}円 |`,
+                    `| 追加オプション合計 | ${parseInt(expCountInput.value) * optionPrices.expression + parseInt(accessoryCountInput.value) * optionPrices.accessory + parseInt(armCountInput.value) * optionPrices.arm + parseInt(othersCountInput.value) * optionPrices.others}円 |`,
+                    `| 小計（税抜） | ${subTotalEl.textContent} |`,
+                    `| 消費税（10%） | ${taxAmountEl.textContent} |`,
+                    `| **合計金額（税込）** | **${grandTotalEl.textContent}** |`
+                ];
+                return markdownLines.join('\n');
+            }
+
+            function copyToClipboard(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                } catch (err) {
+                    console.error('コピーに失敗しました', err);
+                }
+                document.body.removeChild(textarea);
+            }
+
+            expCountInput.addEventListener('input', calculateTotals);
+            accessoryCountInput.addEventListener('input', calculateTotals);
+            armCountInput.addEventListener('input', calculateTotals);
+            othersCountInput.addEventListener('input', calculateTotals);
+            
+            clientNameInput.addEventListener('input', updateSpecSheet);
+            characterNameInput.addEventListener('input', updateSpecSheet);
+            deliveryDateInput.addEventListener('input', updateSpecSheet);
+            canvasWidthInput.addEventListener('input', updateSpecSheet);
+            canvasHeightInput.addEventListener('input', updateSpecSheet);
+
+            copyTextBtn.addEventListener('click', () => {
+                copyToClipboard(generateTextContent());
+                alert('テキストがコピーされました！');
+            });
+            copyMarkdownBtn.addEventListener('click', () => {
+                copyToClipboard(generateMarkdownContent());
+                alert('Markdown形式でコピーされました！');
+            });
+            
+            calculateTotals();
+            updateSpecSheet();
+        });
+    </script>
+</body>
+</html>
+```
