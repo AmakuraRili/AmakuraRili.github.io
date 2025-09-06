@@ -24,8 +24,33 @@
             background-size: cover;
             background-position: top;
             background-attachment: fixed;
-            /* 背景にブラー効果とコントラストを適用 */
-            backdrop-filter: blur(14px) contrast(100%) brightness(80%);;
+            /* 背景にブラー効果とコントラスト、明度を適用 */
+            backdrop-filter: blur(14px) contrast(100%) brightness(80%);
+            position: relative;
+        }
+
+        /* ライトリークアニメーション用のオーバーレイ */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.1), transparent 50%),
+                        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.1), transparent 50%);
+            animation: light-leak 10s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes light-leak {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.2) rotate(5deg);
+                opacity: 0.8;
+            }
         }
 
         .container-center {
@@ -72,6 +97,7 @@
     </style>
 </head>
 <body>
+    <div class="overlay"></div>
 
     <!-- メインコンテンツを中央に配置 -->
     <div class="container-fluid container-center">
