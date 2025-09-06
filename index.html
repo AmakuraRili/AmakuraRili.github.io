@@ -13,6 +13,13 @@
             font-family: 'Inter', sans-serif;
             background-color: #e5e5e5;
             color: #333;
+            /* 背景画像の設定 */
+            background-image: url('https://canvas.example.com/api/files/uploaded:hrteahshehahahe.jpg-f534c9b0-c173-4b48-9f0a-31658e1f409f');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* 背景にブラー効果を適用 */
+            backdrop-filter: blur(10px);
         }
 
         .container-center {
@@ -34,6 +41,15 @@
         .subtitle {
             font-size: 1rem;
             letter-spacing: 0.2em;
+        }
+        
+        /* リンクのスタイル */
+        .social-link {
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        .social-link:hover {
+            color: #000;
         }
 
         /* レスポンシブ対応 */
@@ -63,6 +79,13 @@
             <p class="subtitle mt-4">
                 天倉りい / Amakura Rili
             </p>
+
+            <!-- X（旧Twitter）リンク -->
+            <a href="https://x.com/amakura_rili" target="_blank" class="social-link mt-2">
+                <svg width="24" height="24" viewBox="0 0 1200 1227" fill="black" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="black"/>
+                </svg>
+            </a>
         </div>
     </div>
 
