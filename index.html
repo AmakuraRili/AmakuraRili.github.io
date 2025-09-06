@@ -12,33 +12,34 @@
         html, body {
             height: 100%;
             margin: 0;
-            overflow: hidden; /* スクロールバーを非表示にする */
+            overflow: hidden;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: #e5e5e5;
-            color: #333; /* 文字色を黒に変更 */
-            /* 背景画像の設定 */
+            color: #333;
             background-image: url('./images/bg2.png');
             background-size: cover;
             background-position: top;
             background-attachment: fixed;
-            /* 背景にブラー効果とコントラスト、明度を適用 */
-            backdrop-filter: blur(14px) contrast(100%) brightness(100%);
+            backdrop-filter: blur(14px) contrast(100%) brightness(120%);
             position: relative;
         }
-
-        .container-center {
+        
+        /* 画面中央にコンテンツを配置するための新しいスタイル */
+        .content-wrapper {
             display: flex;
+            flex-direction: column; /* 縦方向に並べる */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 2rem;
         }
 
         /* ロゴ画像のスタイル */
         .main-logo {
-            width: 80%; /* 画面幅に応じて調整 */
+            width: 80%;
             max-width: 600px;
             height: auto;
         }
@@ -50,7 +51,7 @@
         
         /* リンクのスタイル */
         .social-link {
-            color: #333; /* リンクの色を黒に変更 */
+            color: #333;
             transition: color 0.3s ease;
         }
         .social-link:hover {
@@ -63,30 +64,66 @@
                 width: 80vw;
             }
         }
+        
+        /* 実績セクションのスタイル */
+        .news-section {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            width: 90%;
+            max-width: 600px;
+            text-align: left; /* テキストを左寄せに */
+        }
+
+        .news-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .news-date {
+            font-weight: bold;
+        }
+        
+        .news-link {
+            text-decoration: none;
+            color: #333;
+        }
     </style>
 </head>
 <body>
-    <!-- メインコンテンツを中央に配置 -->
-    <div class="container-fluid container-center">
-        <div class="text-center">
-            <!-- ロゴ画像 -->
-            <img src="./images/あまくらグラフィック_ロゴ.png" alt="AMAKURA GRAPHIC" class="main-logo mb-0">
-            
-            <!-- サブタイトル -->
-            <p class="subtitle mt-4">
-                天倉りい / Amakura Rili
-            </p>
+    <div class="container-fluid content-wrapper">
+        
+            <!-- ロゴ、サブタイトル、Xリンクのセクション -->
+            <div class="main-info text-center">
+                <!-- ロゴ画像 -->
+                <img src="./images/あまくらグラフィック_ロゴ.png" alt="AMAKURA GRAPHIC" class="main-logo mb-0">
+                
+                <!-- サブタイトル -->
+                <p class="subtitle mt-4">
+                    天倉りい / Amakura Rili
+                </p>
 
-            <!-- X（旧Twitter）リンク -->
-            <a href="https://x.com/amakura_rili" target="_blank" class="social-link mt-2">
-                <svg width="24" height="24" viewBox="0 0 1200 1227" fill="#333" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="#333"/>
-                </svg>
-            </a>
-        </div>
+                <!-- X（旧Twitter）リンク -->
+                <a href="https://x.com/amakura_rili" target="_blank" class="social-link mt-2">
+                    <svg width="24" height="24" viewBox="0 0 1200 1227" fill="#333" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="#333"/>
+                    </svg>
+                </a>
+            </div>
+            
+            <!-- 実績セクション -->
+            <div class="news-section">
+                <p class="mb-3 fs-5">NEWS</p>
+                <div class="news-item">
+                    <span class="news-date">2025/09/07</span>　
+                    <span class="news-content">WEBサイト公開</span>
+                </div>
+            </div>
+        
     </div>
 
-    <!-- Bootstrap JSを読み込み (任意) -->
+    <!-- Bootstrap JSを読み込み -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
