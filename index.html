@@ -36,13 +36,11 @@
             min-height: 100vh;
         }
 
-        /* 画像のタイポグラフィを再現するためのカスタムスタイル */
-        .main-title {
-            font-size: 8vw; /* ここをvwに変更 */
-            font-weight: 700;
-            line-height: 0.9;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+        /* ロゴ画像のスタイル */
+        .main-logo {
+            width: 80%; /* 画面幅に応じて調整 */
+            max-width: 600px;
+            height: auto;
         }
 
         .subtitle {
@@ -61,13 +59,8 @@
 
         /* レスポンシブ対応 */
         @media (min-width: 768px) {
-            .main-title {
-                font-size: 8rem;
-            }
-        }
-        @media (min-width: 992px) {
-            .main-title {
-                font-size: 9rem;
+            .main-logo {
+                width: 80vw;
             }
         }
     </style>
@@ -76,10 +69,8 @@
     <!-- メインコンテンツを中央に配置 -->
     <div class="container-fluid container-center">
         <div class="text-center">
-            <!-- メインタイトル -->
-            <h1 class="main-title mb-0">
-                AMAKURA<br class="d-md-none">GRAPHIC
-            </h1>
+            <!-- ロゴ画像 -->
+            <img src="./images/あまくらグラフィック_ロゴ.png" alt="AMAKURA GRAPHIC" class="main-logo mb-0">
             
             <!-- サブタイトル -->
             <p class="subtitle mt-4">
