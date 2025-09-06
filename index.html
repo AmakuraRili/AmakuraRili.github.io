@@ -23,7 +23,7 @@
             background-size: cover;
             background-position: top;
             background-attachment: fixed;
-            backdrop-filter: blur(14px) contrast(100%) brightness(100%);
+            backdrop-filter: blur(14px) contrast(100%) brightness(120%);
             position: relative;
         }
         
@@ -44,11 +44,31 @@
             height: auto;
         }
 
-        .subtitle {
-            font-size: 1rem;
+        /* サブタイトルとその他の要素のスタイル */
+        h2 {
+            font-size: 1.8rem;
             letter-spacing: 0.2em;
+            margin-top: 1rem;
         }
         
+        h3 {
+            font-size: 1.25rem;
+            letter-spacing: 0.15em;
+            margin-top: 0.5rem;
+        }
+
+        h4 {
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+        
+        /* Xアイコンのコンテナ */
+        .social-link-container {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
         /* リンクのスタイル */
         .social-link {
             color: #fff; /* リンク色を白に変更 */
@@ -84,8 +104,6 @@
             text-decoration: none;
             color: #fff; /* リンク色を白に変更 */
         }
-
-        
     </style>
 </head>
 <body>
@@ -97,16 +115,23 @@
                 <img src="./images/あまくらグラフィック_ロゴ.png" alt="AMAKURA GRAPHIC" class="main-logo mb-0">
                 
                 <!-- サブタイトル -->
-                <p class="subtitle mt-4">
-                    天倉りい / Amakura Rili
-                </p>
-
+                <h2>天倉りい / Amakura Rili</h2>
+                
+                <h3>Illust × Live2D × Vtuber</h3>
+                <h4>「美術部で遊び足りない！」 完全セルフ受肉 × 個人勢 新人Vtuber12月28日<br>
+                    ママ担当：<a href="https://x.com/RiriyStrawberry" style="color: #fff;">@RiriyStrawberry</a> , <a href="https://x.com/Someha_Uho" style="color: #fff;">@Someha_Uho</a><br>
+                    <br>
+                    ✦HP, 担当Vtuber & Live2Dモデリング（ママのみ）ご依頼　<a href="https://x.gd/RLyqS" style="color: #fff;">https://x.gd/RLyqS</a>
+                </h4>
+                
                 <!-- X（旧Twitter）リンク -->
-                <a href="https://x.com/amakura_rili" target="_blank" class="social-link mt-2">
-                    <svg width="24" height="24" viewBox="0 0 1200 1227" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="#fff"/>
-                    </svg>
-                </a>
+                <div class="social-link-container">
+                    <a href="https://x.com/amakura_rili" target="_blank" class="social-link">
+                        <svg width="24" height="24" viewBox="0 0 1200 1227" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="#fff"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
             
             <!-- 実績セクション -->
